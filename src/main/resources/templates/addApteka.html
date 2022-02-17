@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Apteka</title>
+</head>
+<body>
+<h1>Salom</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 text-center mt-5">
+            <form th:action="@{/apteka/add}" method="post" >
+                <label>Enter name</label>
+                <input class="form-control" type="text" name="name" required minlength="1">
+                <label>Enter city</label>
+                <input class="form-control" type="text" name="city" required minlength="1">
+                <label>Enter district</label>
+                <input class="form-control" type="text" name="district" required minlength="1">
+                <label>Enter street</label>
+                <input class="form-control" type="text" name="street" required minlength="1">
+                <label>Enter home</label>
+                <input class="form-control" type="text" name="home" required minlength="1">
+                <input type="submit" class="form-control">
+            </form>
+        </div>
+        <div class="col-md-8">
+            <table class="table">
+                <div class="alert alert-primary" th:text="${message}">
+                </div>
+                <tr class="table-dark">
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>District</th>
+                    <th>Street</th>
+                    <th>Home</th>
+                    <th>Operation</th>
+                </tr>
+                <tr th:each="apt:${aptekaList}">
+                    <td th:text="${apt.getName()}"></td>
+                    <td th:text="${apt.getAddress().getCity()}"></td>
+                    <td th:text="${apt.getAddress().getDistrict()}"></td>
+                    <td th:text="${apt.getAddress().getStreet()}"></td>
+                    <td th:text="${apt.getAddress().getHome()}"></td>
+                    <td>
+                        <a class="btn btn-primary" th:href="@{'/apteka/edite/'+${apt.getId}}">Edite</a>
+                        <a class="btn btn-secondary" style="background: #e64c4c" th:href="@{'/apteka/delete/'+${apt.getId}}">Delete</a>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
